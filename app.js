@@ -21,6 +21,23 @@ function createGUI() {
 
   const submit = document.createElement("button");
   submit.setAttribute("type", "button");
+  submit.addEventListener(
+    "click",
+    async () =>
+      await fetch(URLInput.value, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        mode: "no-cors",
+      })
+        .then((response) => {
+          console.log(response);
+          response.json();
+        })
+        .then((data) => result.appendChild(document.createTextNode(data)))
+  );
   submit.appendChild(document.createTextNode("Send"));
   document.body.appendChild(submit);
 
